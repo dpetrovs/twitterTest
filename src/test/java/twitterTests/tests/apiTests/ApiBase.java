@@ -7,10 +7,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import twitterTests.configuration.ApiConfiguration;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
 import static io.restassured.RestAssured.oauth;
 

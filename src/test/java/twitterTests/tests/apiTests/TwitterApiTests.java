@@ -5,13 +5,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
-import twitterTests.category.ApiTest;
-import twitterTests.category.UiTest;
-
-import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.post;
-
 
 public class TwitterApiTests extends ApiBase{
     @Test

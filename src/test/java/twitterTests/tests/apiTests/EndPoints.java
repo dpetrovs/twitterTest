@@ -1,7 +1,5 @@
 package twitterTests.tests.apiTests;
 
-import twitterTests.configuration.ApiConfiguration;
-
 public final class EndPoints{
     public static final String baseUri = "https://api.twitter.com/1.1/statuses";
     public static final String homeTimelineUri = "/home_timeline.json";
