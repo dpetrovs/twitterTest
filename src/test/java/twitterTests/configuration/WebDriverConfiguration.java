@@ -89,7 +89,6 @@ public class WebDriverConfiguration {
         return PASSWORD;
     }
 
-
     private Properties getProperties() {
         Properties properties = new Properties();
         try (InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("application.properties")) {

@@ -1,17 +1,15 @@
 package twitterTests.configuration;
 
-import org.junit.Assert;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
 
 public class ApiConfiguration {
     private Properties properties = getProperties();
-    private final String accessToken = properties.getProperty("access.token");
-    private final String accessTokenSecret = properties.getProperty("access.token.secret");
-    private final String apiKey = properties.getProperty("consumer.api.key");
-    private final String apiSecretKey = properties.getProperty("consumer.api.secret.key");
+    private final String ACCESS_TOKEN = properties.getProperty("access.token");
+    private final String ACCESS_TOKEN_SECRET = properties.getProperty("access.token.secret");
+    private final String API_KEY = properties.getProperty("consumer.api.key");
+    private final String API_SECRET_KEY = properties.getProperty("consumer.api.secret.key");
 
     private Properties getProperties() {
             Properties properties = new Properties();
@@ -24,18 +22,18 @@ public class ApiConfiguration {
     }
 
     public String getAccessToken() {
-        return accessToken;
+        return ACCESS_TOKEN;
     }
 
     public String getAccessTokenSecret() {
-        return accessTokenSecret;
+        return ACCESS_TOKEN_SECRET;
     }
 
     public String getApiKey() {
-        return apiKey;
+        return API_KEY;
     }
 
     public String getApiSecretKey() {
-        return apiSecretKey;
+        return API_SECRET_KEY;
     }
 }

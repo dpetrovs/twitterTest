@@ -50,6 +50,8 @@ public class MainPage extends Page{
     @FindBy(xpath = "//ol[@id='stream-items-id']")
     private WebElement tweetsListRoot;
 
+    private static final String LAST_TWEET_ID_XPATH = "//ol[@id='stream-items-id']/li[1]/div[contains(@class, 'tweet')]";
+    private static final String TWEET_TEXT_XPATH = "//ol[@id='stream-items-id']/li[:tweetNumber]/div[1]//p[contains(@class, 'tweet-text')]";
     private String tweetId;
 
     private void tweetButtonClick(){
@@ -66,13 +68,7 @@ public class MainPage extends Page{
         modalTweetButtonClick();
         newTweetsBarClick();
         waiter(driver).until(ExpectedConditions.visibilityOfAllElements(lastTweet));
-        this.tweetId = driver.findElement(By.xpath("//ol[@id='stream-items-id']/li[1]/div[contains(@class, 'tweet')]")).getAttribute("data-tweet-id");
-    }
-
-    public void postDuplicatedTweet(String tweetText){
-        tweetButtonClick();
-        sendTweetKeys(tweetText);
-        modalTweetButtonClick();
+        this.tweetId = driver.findElement(By.xpath(LAST_TWEET_ID_XPATH)).getAttribute("data-tweet-id");
     }
 
     private void newTweetsBarClick(){
@@ -133,7 +129,7 @@ public class MainPage extends Page{
         List<String> result = new ArrayList<>();
         for (int i = 1; i < elementsList.size(); i++) {
             waiter(driver).until(ExpectedConditions.visibilityOfAllElements(elementsList));
-            result.add(driver.findElement(By.xpath("//ol[@id='stream-items-id']/li["+ i + "]/div[1]//p[contains(@class, 'tweet-text')]")).getAttribute("innerText"));
+            result.add(driver.findElement(By.xpath(TWEET_TEXT_XPATH.replace(":tweetNumber", Integer.toString(i)))).getAttribute("innerText"));
         }
         return result;
     }
