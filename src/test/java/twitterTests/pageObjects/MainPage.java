@@ -47,6 +47,9 @@ public class MainPage extends Page{
     @FindBy(xpath = "//div[@id='message-drawer']//span[@class='message-text']")
     private WebElement messageText;
 
+    @FindBy(xpath = "//ol[@id='stream-items-id']")
+    private WebElement tweetsListRoot;
+
     private String tweetId;
 
     private void tweetButtonClick(){
@@ -126,17 +129,24 @@ public class MainPage extends Page{
         return false;
     }
 
-    public String warningMessageContent(){
-        String result = "";
-        if (htmlLanguageElement.getAttribute("lang").equals("ru")){
-            try {
-                waiter(driver).until(ExpectedConditions.textToBePresentInElement(messageText, "Вы уже отправили этот твит."));
-                result = messageText.getText();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+    private List<String> getTweetsText(List<WebElement> elementsList){
+        List<String> result = new ArrayList<>();
+        for (int i = 1; i < elementsList.size(); i++) {
+            waiter(driver).until(ExpectedConditions.visibilityOfAllElements(elementsList));
+            result.add(driver.findElement(By.xpath("//ol[@id='stream-items-id']/li["+ i + "]/div[1]//p[contains(@class, 'tweet-text')]")).getAttribute("innerText"));
         }
         return result;
+    }
+
+    public int repeatedTweetsCount(String tweetText) {
+        int counter = 0;
+        List<String> tweetsText = getTweetsText(visibleTweetsList);
+        for (String s: tweetsText) {
+            if (s.equals(tweetText)){
+                counter++;
+            }
+        }
+        return counter;
     }
 
     @Override

@@ -42,8 +42,8 @@ public class TwitterUiTests extends WebDriverConfiguration{
     public void tweetDuplicationTest(){
         loginPage.login();
         mainPage.postNewTweet("New Tweet 1");
-        mainPage.postDuplicatedTweet("New Tweet 1");
-        Assert.assertEquals("Вы уже отправили этот твит.", mainPage.warningMessageContent());
+        mainPage.postNewTweet("New Tweet 1");
+        Assert.assertEquals(1, mainPage.repeatedTweetsCount("New Tweet 1"));
     }
 
     @Before
